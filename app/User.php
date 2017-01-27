@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\movie;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -15,9 +15,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'birthdate', 'password',
     ];
-
+   
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+      public function reviewed(){
+        return $this->hasMany(Movie::class);
+    }
+
+    // public function created(){// the admin function . Should check this later to make sure this relation realtes only to the admin
+    //     return $this->hasMany(Movie::class);
+    // }
+
+
 }
